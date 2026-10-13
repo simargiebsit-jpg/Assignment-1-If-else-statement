@@ -1,0 +1,21 @@
+function openModal(index) {
+    const m = members[index];
+    document.getElementById('modalImg').src = m.img;
+    document.getElementById('modalImg').alt = m.name;
+    document.getElementById('modalName').textContent = m.name;
+    document.getElementById('modalRole').textContent = m.role;
+    document.getElementById('modalBio').textContent = m.bio;
+
+    const skillsContainer = document.getElementById('modalSkills');
+    skillsContainer.innerHTML = m.skills.map(s => `<span>${s}</span>`).join('');
+
+    document.getElementById('profileModal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('profileModal').classList.remove('active');
+}
+
+document.getElementById('profileModal').addEventListener('click', function (e) {
+    if (e.target === this) closeModal();
+});

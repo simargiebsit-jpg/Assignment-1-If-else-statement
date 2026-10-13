@@ -1,0 +1,106 @@
+<?php
+ $members = [
+    [
+        "name" => "Miguel Rivera",
+        "img" => "miguel.jpg",
+        "role" => "Group Leader",
+        "bio" => "Leads the group meetings, divides the tasks among members, and ensures the project is submitted on time.",
+        "skills" => ["Leadership", "Time Management", "Task Delegation"]
+    ],
+    [
+        "name" => "Annaliza",
+        "img" => "annaliza.jpg",
+        "role" => "Layout Designer",
+        "bio" => "In charge of the website's wireframes, visual structure, and choosing the right color schemes for the project.",
+        "skills" => ["Canva", "UI Layouting", "Creativity"]
+    ],
+    [
+        "name" => "Maria Madonna",
+        "img" => "ma madonna.jpg",
+        "role" => "Web Programmer",
+        "bio" => "Writes the core HTML and CSS code to bring the design to life and make the website functional.",
+        "skills" => ["HTML/CSS", "Basic JavaScript", "Debugging"]
+    ],
+    [
+        "name" => "Margie Si",
+        "img" => "margie.jpg",
+        "role" => "Quality Checker",
+        "bio" => "Tests the website on different devices, checks for typos, and makes sure all links and buttons work properly.",
+        "skills" => ["Proofreading", "Responsive Testing", "Attention to Detail"]
+    ],
+    [
+        "name" => "Nikka Joy",
+        "img" => "nikka joy.jpg",
+        "role" => "Researcher & Documenter",
+        "bio" => "Gathers reference materials, writes the project documentation, and drafts the required written reports.",
+        "skills" => ["Research", "Technical Writing", "Formatting"]
+    ],
+    [
+        "name" => "Amerie Mae",
+        "img" => "ameriemae.jpg",
+        "role" => "System Analyst",
+        "bio" => "Plans the logic of the program, creates the flowcharts, and maps out how the system will work before coding.",
+        "skills" => ["Logic Building", "Flowcharting", "Problem Solving"]
+    ],
+    [
+        "name" => "Yanilyn",
+        "img" => "yannie.jpg",
+        "role" => "Presenter",
+        "bio" => "Creates the final presentation deck, edits the team's photos/assets, and acts as the main speaker during defenses.",
+        "skills" => ["Public Speaking", "Photo Editing", "Visual Arts"]
+    ]
+];
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Team Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>3W Group 5</h1>
+        <p>Meet the amazing people behind our project</p>
+    </header>
+
+    <div class="team-container">
+        <!-- PHP Loop to dynamically generate the cards -->
+        <?php foreach ($members as $index => $member): ?>
+            <div class="team-card" onclick="openModal(<?php echo $index; ?>)">
+                <img src="<?php echo htmlspecialchars($member['img']); ?>" alt="<?php echo htmlspecialchars($member['name']); ?>">
+                <h3><?php echo htmlspecialchars($member['name']); ?></h3>
+                <p class="role"><?php echo htmlspecialchars($member['role']); ?></p>
+                <a href="#" class="btn" onclick="event.stopPropagation(); openModal(<?php echo $index; ?>)">View Profile</a>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <div class="modal" id="profileModal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal()">&times;</button>
+            <img id="modalImg" src="" alt="">
+            <h2 id="modalName"></h2>
+            <div class="info-row">
+                <div class="label">Role</div>
+                <div class="value" id="modalRole"></div>
+            </div>
+            <div class="info-row">
+                <div class="label">Bio</div>
+                <div class="value" id="modalBio"></div>
+            </div>
+            <div class="info-row">
+                <div class="label">Skills</div>
+                <div class="skills" id="modalSkills"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const members = <?php echo json_encode($members, JSON_HEX_TAG); ?>;
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
